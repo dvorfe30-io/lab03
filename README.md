@@ -24,6 +24,9 @@
 вам необходимо создать два `CMakeList.txt` для двух простых приложений:
 * *hello_world*, которое использует библиотеку *formatter_ex*;
 * *solver*, приложение которое испольует статические библиотеки *formatter_ex* и *solver_lib*.
+### main CMakeLists.txt
+[CMakeLists.txt](https://github.com/dvorfe30-io/lab03/blob/main/CMakeLists.txt)
+
 ### hello_world_application
 [CMakeLists.txt](https://github.com/dvorfe30-io/lab03/blob/main/hello_world_application/CMakeLists.txt)
 
