@@ -16,11 +16,11 @@ add_subdirectory(solver_lib)
 add_subdirectory(hello_world_application)
 add_subdirectory(solver_application)
 
-install(TARGETS formatter_lib formatter_ex_lib solver_lib
+install(TARGETS formatter formatter_ex solver
 	ARCHIVE DESTINATION lib
 	LIBRARY DESTINATION lib
 	RUNTIME DESTINATION bin)
-install(TARGETS solver
+install(TARGETS solver_application
 	RUNTIME DESTINATION bin)
 install(DIRECTORY formatter_lib/ formatter_ex_lib/ solver_lib/
 	DESTINATION include
