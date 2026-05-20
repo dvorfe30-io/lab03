@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install dependencies
+        run: sudo apt update && sudo apt install -y dpkg-dev rpm
+        
+      - name: Configure CMake
+        run: cmake -B build -D CMAKE_BUILD_TYPE=Release
+        
+      - name: Build project
+        run: cmake --build build --config Release
+        
+      - name: Create packages
+        run: |
+          cd build
+          cpack -G DEB
+          cpack -G RPM
+          cpack -G ZIP
+          
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/*.deb
+            build/*.rpm
+            build/*.zip
+
+  win32:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure CMake
+        run: cmake -B build -D CMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --config Release
+      - name: Package
+        run: |
+          cd build
+          cpack -G WIX
+      - name: Upload
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/*.msi
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure CMake
+        run: cmake -B build -D CMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --config Release
+      - name: Package
+        run: |
+          cd build
+          cpack -G DragNDrop
+      - name: Upload
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/*.dmg
