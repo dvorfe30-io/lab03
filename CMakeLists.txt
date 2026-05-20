@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.10)
 project(lab06)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -16,7 +16,7 @@ add_subdirectory(solver_lib)
 add_subdirectory(hello_world_application)
 add_subdirectory(solver_application)
 
-install(TARGETS formatter formatter_ex solver_lib
+install(TARGETS formatter_lib formatter_ex_lib solver_lib
 	ARCHIVE DESTINATION lib
 	LIBRARY DESTINATION lib
 	RUNTIME DESTINATION bin)
